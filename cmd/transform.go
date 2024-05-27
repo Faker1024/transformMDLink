@@ -23,7 +23,6 @@ var RootCmd = &cobra.Command{
 	Long:  `transformMDLink， start！！！`,
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println(cmd.Flags().GetString("path"))
-		fmt.Println(cmd.Flags().Arg(0))
 	},
 }
 
@@ -36,5 +35,5 @@ func Execute() {
 
 func init() {
 	RootCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
-	RootCmd.Flags().BoolP("path", "p", false, "file path")
+	RootCmd.Flags().String("path", "p", "file path")
 }
