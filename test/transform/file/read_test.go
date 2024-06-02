@@ -1,5 +1,11 @@
 package file
 
+import (
+	"fmt"
+	"testing"
+	"transformMDLink/internal/transform/utils"
+)
+
 //func TestRead(t *testing.T) {
 //	read, err := file.Read("/home/jack/GolandProjects/transformMDLink/assets/test.md")
 //	if err != nil {
@@ -30,3 +36,13 @@ package file
 //		fmt.Println(s)
 //	}
 //}
+
+func TestGetFirstLevelFilesAndDirs(t *testing.T) {
+	dirs, err := utils.GetAllMDFiles("/home/jack/GolandProjects/transformMDLink")
+	if err != nil {
+		return
+	}
+	for _, dir := range dirs {
+		fmt.Println(dir)
+	}
+}
