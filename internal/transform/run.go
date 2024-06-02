@@ -12,7 +12,7 @@ func Run(config config.Config) {
 	if flag {
 		f = file.Dir{Path: config.Path()}
 	} else {
-		f = file.MdFile{Path: config.Path()}
+		f = &file.MdFile{Path: config.Path()}
 	}
 	f.Load()
 }
