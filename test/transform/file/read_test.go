@@ -3,6 +3,7 @@ package file
 import (
 	"fmt"
 	"testing"
+	"transformMDLink/internal/transform/file"
 	"transformMDLink/internal/transform/utils"
 )
 
@@ -45,4 +46,11 @@ func TestGetFirstLevelFilesAndDirs(t *testing.T) {
 	for _, dir := range dirs {
 		fmt.Println(dir)
 	}
+}
+
+func TestMdFileLoad(t *testing.T) {
+	mdFile := file.MdFile{Path: "/home/jack/GolandProjects/transformMDLink/assets/test.md"}
+	mdFile.Load()
+	mdFile.ParseFile()
+	mdFile.Save()
 }

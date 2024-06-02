@@ -34,3 +34,13 @@ func GetAllMDFiles(path string) ([]string, error) {
 	})
 	return files, err
 }
+
+// FileExists 检查给定路径是否存在文件
+func FileExists(path string) bool {
+	_, err := os.Stat(path)
+	// os.Stat returns an error if the file does not exist or the path is invalid
+	if os.IsNotExist(err) {
+		return false
+	}
+	return err == nil
+}
