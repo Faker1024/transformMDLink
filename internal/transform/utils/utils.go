@@ -2,8 +2,11 @@ package utils
 
 import (
 	"fmt"
+	"io"
+	"net/http"
 	"os"
 	"path/filepath"
+	"strings"
 )
 
 // IsDir 是否为文件夹
@@ -43,4 +46,40 @@ func FileExists(path string) bool {
 		return false
 	}
 	return err == nil
+}
+
+// ReadImage 读取图片文件，支持本地文件和网络URL
+func ReadImage(path string) ([]byte, error) {
+	// 检查是否为网络URL
+	if strings.HasPrefix(path, "http://") || strings.HasPrefix(path, "https://") {
+		return readImageFromURL(path)
+	}
+	// 否则视为本地文件
+	return readImageFromFile(path)
+}
+
+// readImageFromURL 从网络URL读取图片
+func readImageFromURL(url string) ([]byte, error) {
+	resp, err := http.Get(url)
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+
+	if resp.StatusCode != http.StatusOK {
+		return nil, fmt.Errorf("failed to fetch image, status code: %d", resp.StatusCode)
+	}
+
+	return io.ReadAll(resp.Body)
+}
+
+// readImageFromFile 从本地文件读取图片
+func readImageFromFile(filePath string) ([]byte, error) {
+	file, err := os.Open(filePath)
+	if err != nil {
+		return nil, err
+	}
+	defer file.Close()
+
+	return io.ReadAll(file)
 }

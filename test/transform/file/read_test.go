@@ -48,7 +48,7 @@ func TestGetFirstLevelFilesAndDirs(t *testing.T) {
 	}
 }
 
-func TestMdFileLoad(t *testing.T) {
+func TestMdFile(t *testing.T) {
 	mdFile := file.MdFile{Path: "/home/jack/GolandProjects/transformMDLink/assets/test.md"}
 	mdFile.Load()
 	mdFile.ParseFile()

@@ -57,7 +57,7 @@ func (f *MdFile) generateNewMDFileName() (string, error) {
 	newFileName := strings.TrimSuffix(f.Path, ".md") + "_replace.md"
 	num := 1
 	for utils.FileExists(newFileName) {
-		newFileName = strings.TrimSuffix(f.Path, ".md") + "_" + strconv.Itoa(num) + ".md"
+		newFileName = strings.TrimSuffix(newFileName, ".md") + "_" + strconv.Itoa(num) + ".md"
 		num += 1
 	}
 	return newFileName, nil
